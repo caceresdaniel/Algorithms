@@ -15,12 +15,12 @@ public class maxSubArrayBruteForce {
 			for(int j = i; j < array.length; j++){
 				int currentSum = array[i] + array[j];
 				if(currentSum > maxSum && i != j){
-					sum = currentSum;
+					maxSum = currentSum;
 					leftIndex = i;
 					rightIndex = j;
 				}
 			}
 		}		
-		System.out.println("left index is: " + leftIndex + " rightIndex is: " + rightIndex + " sum is: " + sum + " using the brute force method");
+		System.out.println("left index is: " + leftIndex + " rightIndex is: " + rightIndex + " sum is: " + maxSum + " using the brute force method");
 	}
 }
