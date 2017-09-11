@@ -7,14 +7,11 @@ public class maxSubArrayBruteForce {
 		int leftIndex = 0, rightIndex = 0, maxSum = 0;
 		
 		for(int i = 0; i < array.length; i++){
-			if(array[i] > maxSum){
-				leftIndex = i;
-				rightIndex = i;
-				maxSum = array[i];
-			}
-			for(int j = i; j < array.length; j++){
-				int currentSum = array[i] + array[j];
-				if(currentSum > maxSum && i != j){
+			int currentSum = 0;
+			currentSum = array[i];
+			for(int j = i + 1; j < array.length; j++){
+				currentSum = array[j] + currentSum;
+				if(currentSum > maxSum){
 					maxSum = currentSum;
 					leftIndex = i;
 					rightIndex = j;

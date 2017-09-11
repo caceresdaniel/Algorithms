@@ -70,7 +70,7 @@ public class maxSubarray {
 		}
 
 		public String toString() {
-			return "left value is = " + left + " right value is = " + right + " sum is = " + sum;
+			return "left value is = " + left + " right value is = " + right + " sum is = " + sum + " using divide and conquor";
 		}
 	}
 }
