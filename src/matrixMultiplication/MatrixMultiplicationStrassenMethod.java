@@ -116,18 +116,18 @@ public class MatrixMultiplicationStrassenMethod {
 
 	public static void partition(int[][] array, int[][] partitionedArray, int index1, int index2) {
 		for (int i = 0; i < partitionedArray.length; i++) {
+			index1++;
 			for (int j = 0; j < partitionedArray.length - 1; j++) {
-				partitionedArray[i][j] = array[index1][index2];
+				partitionedArray[i][j] = array[index1 -1 ][index2];
 				index2++;
 			}
-			index1++;
 		}
 	}
 
 	public static void combine(int[][] array, int[][] combination, int index1, int index2) {
 		for (int i = 0; i < array.length; i++) {
+			index1++;
 			for (int j = 0; j < array.length; j++) {
-				index1++;
 				combination[index1][index2] = array[i][j];
 				index2++;
 			}
