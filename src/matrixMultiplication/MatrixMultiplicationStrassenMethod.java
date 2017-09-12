@@ -10,6 +10,8 @@ public class MatrixMultiplicationStrassenMethod {
 		result = strassen(A, B);
 
 		printer(result);
+		
+		System.out.println("Using Strassen's Algorithm");
 
 	}
 
@@ -115,36 +117,20 @@ public class MatrixMultiplicationStrassenMethod {
 	}
 
 	public static void partition(int[][] array, int[][] partitionedArray, int index1, int index2) {
-		for (int i = 0; i < partitionedArray.length; i++) {
-			index1++;
-			for (int j = 0; j < partitionedArray.length - 1; j++) {
-				partitionedArray[i][j] = array[index1 -1 ][index2];
-				index2++;
+		for (int i = 0, i2 = index1; i < partitionedArray.length; i++, i2++) {
+			for (int j = 0, j2 = index2; j < partitionedArray.length; j++, j2++) {
+				partitionedArray[i][j] = array[i2][j2];
 			}
 		}
 	}
 
 	public static void combine(int[][] array, int[][] combination, int index1, int index2) {
-		for (int i = 0; i < array.length; i++) {
-			index1++;
-			for (int j = 0; j < array.length; j++) {
-				combination[index1][index2] = array[i][j];
-				index2++;
+		for (int i = 0, i2 = index1; i < array.length; i++, i2++) {
+			for (int j = 0, j2 = index2; j < array.length ; j++, j2++) {
+				combination[i2][j2] = array[i][j];	
 			}
 		}
 	}
-
-//	public void split(int[][] P, int[][] C, int iB, int jB){
-//		for (int i1 = 0, i2 = iB; i1 < C.length; i1++, i2++)
-//			for (int j1 = 0, j2 = jB; j1 < C.length; j1++, j2++)
-//				C[i1][j1] = P[i2][j2];
-//	}
-//
-//	public void join(int[][] C, int[][] P, int iB, int jB){
-//		for (int i1 = 0, i2 = iB; i1 < C.length; i1++, i2++)
-//			for (int j1 = 0, j2 = jB; j1 < C.length; j1++, j2++)
-//				P[i2][j2] = C[i1][j1];
-//	}
 
 	public static void printer(int[][] A) {
 		for (int i = 0; i < A.length; i++) {
