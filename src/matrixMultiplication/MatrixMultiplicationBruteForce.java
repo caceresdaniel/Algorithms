@@ -21,12 +21,12 @@ public class MatrixMultiplicationBruteForce {
 	}
 
 	public static int[][] bruteForce(int[][] A, int[][] B, int n) {
-		int n = A.length;
+		n = A.length;
 		int[][] C = new int[n][n];
 
 		if (n == 1) {
 			C[0][0] = A[0][0] * B[0][0];
-		} else{
+		} else {
 			int[][] A11 = new int[n / 2][n / 2];
 			int[][] A12 = new int[n / 2][n / 2];
 			int[][] A21 = new int[n / 2][n / 2];
@@ -39,30 +39,45 @@ public class MatrixMultiplicationBruteForce {
 			int[][] C12 = new int[n / 2][n / 2];
 			int[][] C21 = new int[n / 2][n / 2];
 			int[][] C22 = new int[n / 2][n / 2];
-			
-			C1
-			
+
+			int[][] R1 = bruteForce(A11, B11, n / 2);
+			int[][] R2 = bruteForce(A12, B21, n / 2);
+			int[][] R3 = bruteForce(A11, B12, n / 2);
+			int[][] R4 = bruteForce(A12, B22, n / 2);
+			int[][] R5 = bruteForce(A21, B11, n / 2);
+			int[][] R6 = bruteForce(A22, B21, n / 2);
+			int[][] R7 = bruteForce(A21, B12, n / 2);
+			int[][] R8 = bruteForce(A22, B22, n / 2);
+
+			C11 = add(R1, R2);
+			C12 = add(R3, R4);
+			C21 = add(R5, R6);
+			C22 = add(R7, R8);
+
+			combine(C11, C, 0, 0);
+			combine(C12, C, 0, n / 2);
+			combine(C21, C, n / 2, 0);
+			combine(C22, C, n / 2, n / 2);
+
 		}
 
 		return C;
 	}
-	
-	public static int[][] add(){
-		
-	}
-	
-	public static void partition(int[][] array, int[][] partitionedArray, int index1, int index2) {
-		for (int i = 0, i2 = index1; i < partitionedArray.length; i++, i2++) {
-			for (int j = 0, j2 = index2; j < partitionedArray.length; j++, j2++) {
-				partitionedArray[i][j] = array[i2][j2];
+
+	public static int[][] add(int[][] arrayOne, int[][] arrayTwo) {
+		int[][] result = new int[arrayOne.length][arrayOne.length];
+		for (int i = 0; i < arrayOne.length; i++) {
+			for (int j = 0; j < arrayOne.length; j++) {
+				result[i][j] = arrayOne[i][j] + arrayTwo[i][j];
 			}
 		}
+		return result;
 	}
 
 	public static void combine(int[][] array, int[][] combination, int index1, int index2) {
 		for (int i = 0, i2 = index1; i < array.length; i++, i2++) {
-			for (int j = 0, j2 = index2; j < array.length ; j++, j2++) {
-				combination[i2][j2] = array[i][j];	
+			for (int j = 0, j2 = index2; j < array.length; j++, j2++) {
+				combination[i2][j2] = array[i][j];
 			}
 		}
 	}
