@@ -7,17 +7,12 @@ public class MatrixMultiplicationBruteForce {
 
 		int[][] B = { { 7, 9, 2, 5 }, { 3, 4, 1, 7 }, { 6, 8, 5, 2 }, { 1, 2, 4, 3 } };
 
-		int[][] C = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+		int n = A.length;
 
-		for (int i = 0; i < A.length; i++) {
-			for (int j = 0; j < B.length; j++) {
-				for (int k = 0; k < A.length; k++) {
-					C[i][j] = C[i][j] + A[i][k] * B[k][j];
-				}
-			}
-		}
+		int[][] result = new int[n][n];
+		result = bruteForce(A, B, n);
 
-		printer(C);
+		printer(result);
 	}
 
 	public static int[][] bruteForce(int[][] A, int[][] B, int n) {
@@ -39,6 +34,15 @@ public class MatrixMultiplicationBruteForce {
 			int[][] C12 = new int[n / 2][n / 2];
 			int[][] C21 = new int[n / 2][n / 2];
 			int[][] C22 = new int[n / 2][n / 2];
+
+			partition(A, A11, 0, 0);
+			partition(A, A12, 0, n / 2);
+			partition(A, A21, n / 2, 0);
+			partition(A, A22, n / 2, n / 2);
+			partition(B, B11, 0, 0);
+			partition(B, B12, 0, n / 2);
+			partition(B, B21, n / 2, 0);
+			partition(B, B22, n / 2, n / 2);
 
 			int[][] R1 = bruteForce(A11, B11, n / 2);
 			int[][] R2 = bruteForce(A12, B21, n / 2);
@@ -82,7 +86,16 @@ public class MatrixMultiplicationBruteForce {
 		}
 	}
 
+	public static void partition(int[][] array, int[][] partitionedArray, int index1, int index2) {
+		for (int i = 0, i2 = index1; i < partitionedArray.length; i++, i2++) {
+			for (int j = 0, j2 = index2; j < partitionedArray.length; j++, j2++) {
+				partitionedArray[i][j] = array[i2][j2];
+			}
+		}
+	}
+
 	public static void printer(int[][] A) {
+		System.out.println("Using Brute Force Method");
 		for (int i = 0; i < A.length; i++) {
 			System.out.print("Row " + i + ": ");
 			for (int j = 0; j < A.length; j++) {
