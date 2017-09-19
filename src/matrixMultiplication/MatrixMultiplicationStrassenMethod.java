@@ -7,11 +7,13 @@ public class MatrixMultiplicationStrassenMethod {
 		int[][] B = { { 7, 9, 2, 5 }, { 3, 4, 1, 7 }, { 6, 8, 5, 2 }, { 1, 2, 4, 3 } };
 
 		int[][] result = new int[A.length][A.length];
+
+		int n = A.length;
+
 		result = strassen(A, B);
 
-		printer(result);
-		
 		System.out.println("Using Strassen's Algorithm");
+		printer(result);
 
 	}
 
@@ -58,7 +60,7 @@ public class MatrixMultiplicationStrassenMethod {
 			S6 = add(B11, B22);
 			S7 = subtract(A12, A22);
 			S8 = add(B21, B22);
-			S9 = subtract(A11, A21);
+			S9 = subtract(A21, A11);
 			S10 = add(B11, B12);
 
 			int[][] P1 = new int[n / 2][n / 2];
@@ -69,23 +71,23 @@ public class MatrixMultiplicationStrassenMethod {
 			int[][] P6 = new int[n / 2][n / 2];
 			int[][] P7 = new int[n / 2][n / 2];
 
-			P1 = strassen(A11, S1);
-			P2 = strassen(S2, B22);
-			P3 = strassen(S3, B11);
+			P3 = strassen(A11, S1);
+			P5 = strassen(S2, B22);
+			P2 = strassen(S3, B11);
 			P4 = strassen(A22, S4);
-			P5 = strassen(S5, S6);
-			P6 = strassen(S7, S8);
-			P7 = strassen(S9, S10);
+			P1 = strassen(S5, S6);
+			P7 = strassen(S7, S8);
+			P6 = strassen(S9, S10);
 
 			int[][] C11 = new int[n / 2][n / 2];
 			int[][] C12 = new int[n / 2][n / 2];
 			int[][] C21 = new int[n / 2][n / 2];
 			int[][] C22 = new int[n / 2][n / 2];
 
-			C11 = subtract(add(P5, P4), add(P2, P6));
-			C12 = add(P1, P2);
-			C21 = add(P3, P4);
-			C22 = add(P5, subtract(subtract(P1, P3), P7));
+			C11 = add(subtract(add(P1, P4), P5), P7);
+			C12 = add(P3, P5);
+			C21 = add(P2, P4);
+			C22 = add(subtract(add(P1, P3), P2), P6);
 
 			combine(C11, C, 0, 0);
 			combine(C12, C, 0, n / 2);
@@ -126,8 +128,8 @@ public class MatrixMultiplicationStrassenMethod {
 
 	public static void combine(int[][] array, int[][] combination, int index1, int index2) {
 		for (int i = 0, i2 = index1; i < array.length; i++, i2++) {
-			for (int j = 0, j2 = index2; j < array.length ; j++, j2++) {
-				combination[i2][j2] = array[i][j];	
+			for (int j = 0, j2 = index2; j < array.length; j++, j2++) {
+				combination[i2][j2] = array[i][j];
 			}
 		}
 	}
