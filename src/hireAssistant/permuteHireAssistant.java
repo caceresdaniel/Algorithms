@@ -7,12 +7,12 @@ public class permuteHireAssistant {
 
 	public static void main(String[] args){
 		int[] assistants = { 1, 3, 5, 6, 9, 10};
-		System.out.println("Array before randomization");
+		System.out.println("Array before permutation");
 		printer(assistants);
 		
 		permuteBySorting(assistants);
 		System.out.println();
-		System.out.println("Array after randomization");
+		System.out.println("Array after permutation");
 		printer(assistants);
 		
 		System.out.println();
@@ -21,20 +21,25 @@ public class permuteHireAssistant {
 	
 	public static int randomizedHireAssistant(int[] assistants){
 		int bestAssistant = 0;
+		int amountHired = 0;
 		for(int assistant : assistants){
 			if(assistant > bestAssistant){
 				bestAssistant = assistant;
+				amountHired++;
 			}
 		}
+		System.out.println("Amount of Employess Hired: " + amountHired);
 		return bestAssistant;
 	}
 	
 	public static void permuteBySorting(int[] assistants){
 		int n = assistants.length;
 		int[] P = new int[n];
+		
 		for( int i = 0; i < n; i ++){
 			P[i] = random(1, Math.pow(n, 3));
 		}
+		
 		//Calls method that creates a TreeMap from the 2 arrays
 		TreeMap<Integer, Integer> map = createMap(P, assistants);
 		
@@ -42,7 +47,6 @@ public class permuteHireAssistant {
 		
 		for(int i = 0; i < assistants.length; i++){
 			assistants[i] = (int) newAssistants[i];
-			
 		}
 		
 	}
