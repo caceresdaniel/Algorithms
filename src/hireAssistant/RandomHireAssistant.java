@@ -1,38 +1,56 @@
-//PERMUTE-BY-SORTING(A)
-// n = A:length
-// let P [1 .... n] be a new array
-// for i = 1 to n
-// 		P [i] = RANDOM(1, n3)
-//sort A, using P as sort keys
-
-//RANDOMIZE-IN-PLACE.A/
-//n D A:length
-//for i = 1 to n
-//swap A[i] with A[RANDOM(i,n)]
-
-
 package hireAssistant;
+
+import java.util.Random;
 
 public class RandomHireAssistant {
 	public static void main(String[] args){
+		int[] assistants = { 1, 3, 5, 6, 9, 10};
+		System.out.println("Array before randomization");
+		printer(assistants);
+		randomizeInPlace(assistants);
+		System.out.println();
+		System.out.println("Array after randomization");
+		printer(assistants);
 		
+		System.out.println();
+		System.out.println("Assistant # " + randomizedHireAssistant(assistants) +" hired.");
 	}
 	
-	public void randomizedHireAssistant(int[] assistants){
+	public static int randomizedHireAssistant(int[] assistants){
 		int bestAssistant = 0;
+		int amountHired = 0;
 		for(int assistant : assistants){
 			if(assistant > bestAssistant){
 				bestAssistant = assistant;
+				amountHired++;
 			}
+		}
+		System.out.println("Amount of Employees Hired: " + amountHired);
+		return bestAssistant;
+	}
+	
+	public static void randomizeInPlace(int[] assistants){
+		int n = assistants.length;
+		for(int i = 0; i < n; i++){
+			int randomIndex = random(i, n);
+			int t = assistants[i];
+			assistants[i] = assistants[randomIndex];
+			assistants[randomIndex] = t;
 		}
 	}
 	
-	public void randomizeInPlace(int[] assistants){
-		int n = assistants.length;
-		for(int assistant : assistants){
-			
-		}
-		
+	public static int random(int i, int n){
+        int random = (int) new Random().nextInt(n - i) + i;
+        return random;
 	}
+	
+	public static void printer(int[] array){
+		System.out.print("{ ");
+		for(int a : array){
+			System.out.print(a + " ");
+		}
+		System.out.print("}");
+	}
+	
 	
 }
