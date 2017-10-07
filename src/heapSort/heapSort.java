@@ -26,8 +26,8 @@ public class heapSort {
 	}
 
 	public void buildMaxHeap(int[] A) {
-		A.heap-size = A.length;
-		for(int i = Math.floor(A.length/2))
+//		A.heap-size = A.length;
+//		for(int i = Math.floor(A.length/2))
 	}
 
 	public void heapsort(int[] A) {
