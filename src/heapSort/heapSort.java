@@ -17,6 +17,7 @@ public class heapSort {
 		else largest = i;
 		
 		if(largest != i){
+			//to do swap properly.
 			A[i] = A[largest];
 			maxHeapify(A, largest);
 		}
