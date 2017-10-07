@@ -18,14 +18,11 @@ public class RandomHireAssistant {
 	
 	public static int randomizedHireAssistant(int[] assistants){
 		int bestAssistant = 0;
-		int amountHired = 0;
 		for(int assistant : assistants){
 			if(assistant > bestAssistant){
 				bestAssistant = assistant;
-				amountHired++;
 			}
 		}
-		System.out.println("Amount of Employees Hired: " + amountHired);
 		return bestAssistant;
 	}
 	
